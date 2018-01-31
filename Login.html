@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Free Bulma template</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/bulma-0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="css/mystyles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.popupoverlay.js"></script>
+    <script src="js/jquery.redirect.js"></script>
+    <script src="js/login.js"></script>
+</head>
+
+<body>
+    </div>
+    <section class="hero is-warning is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title has-text-grey">Login</h3>
+                    <p class="subtitle has-text-grey">Please login to proceed.</p>
+                    <!-- Begin of login box -->
+                    <div class="box">
+                        <figure class="image is-96x96 container">
+                            <img src="images/bunny_icon.jpeg">
+                        </figure>
+                        <br>
+                        <br>
+                        <form name="login_form" method="post" action="./login.php">
+                            <div class="field">
+                                <div class="control">
+                                    <input id="l_uname" name="l_uname" class="input is-large" type="username" placeholder="Username" autofocus="">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control has-icons-left">
+                                    <input id="l_password" name="l_password" class="input is-large" type="password" placeholder=" Password">
+                                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock" style="color: #f023"></i>
+                    </span>
+                                </div>
+                            </div>
+                            <button class="button is-block is-primary is-large is-fullwidth">Login</button>
+                        </form>
+                    </div>
+                    <!-- End of login box -->
+                    <!-- Begin of Signup modal --> 
+                    <div class="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            <div class="box">
+                                <figure class="image is-96x96 container">
+                                    <img src="images/bunny_icon.jpeg">
+                                </figure>
+                                <br>
+                                <br>
+                                <form name="signup_form" method="post" action="./signup.php">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input id="uname" name="uname" class="input is-large" type="username" placeholder="Username" autofocus="">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control has-icons-left">
+                                            <input id="password" name="password" class="input is-large" type="password" placeholder=" Password">
+                                            <span class="icon is-small is-left">
+                                       <i class="fas fa-lock" style="color: #f023"></i>
+                                    </span>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control has-icons-left">
+                                            <input id="confirm_password" name="comfirm_password" class="input is-large" type="password" placeholder=" Comfirm Password">
+                                            <span class="icon is-small is-left">
+                                       <i class="fas fa-lock" style="color: #f023"></i>
+                                    </span>
+                                        </div>
+                                    </div>
+                                    <button id="signup_submit" type="submit" class="button is-block is-primary is-large is-fullwidth">Sign up</button>
+                                </form>
+                            </div>
+                            <!-- End of modal content -->
+                        </div>
+                        <button class="modal-close is-large" aria-label="close"></button>
+                    </div>                         <!-- End of Signup modal -->
+                    <p class="has-text-grey">
+                        <a id="open-modal" href="#">Sign Up</a> &nbsp;·&nbsp;
+                        <a id="helpbox" href="../">Need Help?</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- End of herobody -->
+
+        <!-- Message box -->
+        <div id="my_popup">
+            <article class="message">
+                <div class="message-header">
+                    <p>Message</p>
+                    <button class="delete my_popup_close" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                    <span>Some Message goes here!</span>
+                </div>
+            </article>
+        </div>
+
+    </section>
+</body>
+</html>
