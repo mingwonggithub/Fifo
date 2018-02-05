@@ -23,7 +23,44 @@ $(document).ready(function() {
         $('.html').removeClass("is-clipped");
     });
 
-x
+    //Login Form after submission
+    var logfrm = $("form[name='login_form']");
+    $("form[name='login_form']").submit(function(event) {
+        event.preventDefault();
+
+        if ($("#l_uname").val().trim() == "" ||
+            $("#l_password").val().trim() == "") {
+            $('#my_popup span').text('All fields are required.');
+            $('#my_popup').popup('show');
+        } else {
+
+            $.ajax({
+                type: logfrm.attr('method'),
+                url: logfrm.attr('action'),
+                data: logfrm.serialize(), // serializes the form's elements
+                dataType: 'JSON',
+                success: function(result) {
+
+                    if (result[0].success == "yes") {
+
+                        $.redirect("./session.php", { 'userid': result[0].userid, 'user': result[0].uname }, "POST", "_self");
+
+
+                    } else {
+                        $('#my_popup span').text("The username " + result[0].uname + " and password " + result[0].password + " does not match!");
+                        $('#my_popup').popup('show');
+                    }
+
+                },
+                error: function(result) {
+                    $('#my_popup span').text("An error occurred with your login");
+                    $('#my_popup').popup('show');
+                },
+            }); // End of ajax 
+
+        } // End of else 
+
+    }); // End of login form 
 
     //Signup Form after submission
     var frm = $("form[name='signup_form']");
