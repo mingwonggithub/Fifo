@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Sessions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="css/gen.css">
+    <link rel="stylesheet" href="css/mystyles.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.popupoverlay.js"></script>
+    <script src="js/jquery.redirect.js"></script>
+    <script src="js/session.js"></script>
+</head>
+
+<body>
+    <section class="hero is-medium">
+        <figure class="image">
+            <img src="images/usc.jpg">
+        </figure>
+    </section>
+    <nav class="navbar is-primary">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="./index.html" style="font-weight:bold;">
+                    M
+                    <img src="images/bunny_icon2.png">
+                        W
+                        </a>
+                <span class="navbar-burger" data-target="navMenu">
+                    <span></span>
+                <span></span>
+                <span></span>
+                </span>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="./index.html" class="navbar-item">Home</a>
+                    <a href="https://cse.sc.edu/~pplante/csce101/index.html" class="navbar-item">CSCE 101 HomePage</a>
+                    <a href="https://cse.sc.edu/~cmatthew/" class="navbar-item">CSCE 102 HomePage</a>
+                    <div class="navbar-item has-dropdown">
+                        <a href="#Instructor" class="navbar-link">
+                            Instructor
+                        </a>
+                        <div class="navbar-dropdown gen-is-hidden">
+                            <a href="./Login.html" class="navbar-item">Login</a>
+                            <a href="./logout.php" class="navbar-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Hi {{name}}, welcome to the Class Session Page!
+            </h1>
+            <p class="subtitle">
+                Create a new class session by entering the subject abbreviation with no spaces, course number, and room.
+            </p>
+            <!-- Start of create session form --> 
+            <form name="session_form" method="post" action="./session_create.php">
+                <div class="field columns">
+                    <div class="control column">
+                        <input id="subject" name="subject" class="input" type="text" placeholder="Subject e.g csce">
+                    </div>
+                    <div class="control column">
+                        <input id="courseN" name="courseN" class="input" type="text" placeholder="Course e.g 101">
+                    </div>
+                    <div class="control column">
+                        <input id="room" name="room" class="input" type="text" placeholder="Room e.g C48">
+                    </div>
+                    <div class="control column">
+                        <button id="open-modal" type="submit" class="button is-block is-warning">Create New Session</button>
+                    </div>
+                </div>
+            </form> <!-- End of create Session Form --> 
+            <br>
+            <p class="subtitle">
+                Enter a Session by clicking on its ID. Clicking Remove will remove corresponding session immediately.
+            </p>
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th> SessionId</th>
+                        <th>TimeStamp</th>
+                        <th>Course</th>
+                        <th>Room</th>
+                        <th>Remove?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Session list -->
+                    {{content}}
+                </tbody>
+            </table>
+            <!-- Message box -->
+            <div id="my_popup">
+                <article class="message">
+                    <div class="message-header">
+                        <p>Message</p>
+                        <button class="delete my_popup_close" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <span>Some Message goes here!</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <!-- End of container -->
+    </section>
+</body>
+</html>
