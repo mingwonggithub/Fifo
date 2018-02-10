@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSCE 101/102 Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="css/gen.css">
+    <link rel="stylesheet" href="css/mystyles.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.popupoverlay.js"></script>
+    <script src="js/jquery.redirect.js"></script>
+    <script src="js/question.js"></script>
+</head>
+
+<body>
+    <section class="hero is-medium">
+        <figure class="image">
+            <img src="images/usc.jpg">
+        </figure>
+    </section>
+    <nav class="navbar is-primary">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="./index.html" style="font-weight:bold;">
+                        M
+                        <img src="images/bunny_icon2.png">
+                            W
+                            </a>
+                <span class="navbar-burger" data-target="navMenu">
+                        <span></span>
+                <span></span>
+                <span></span>
+                </span>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="./index.html" class="navbar-item">Home</a>
+                    <a href="https://cse.sc.edu/~pplante/csce101/index.html" class="navbar-item">CSCE 101 HomePage</a>
+                    <a href="https://cse.sc.edu/~cmatthew/" class="navbar-item">CSCE 102 HomePage</a>
+                    <div class="navbar-item has-dropdown">
+                        <a href="#Instructor" class="navbar-link">
+                                Instructor
+                            </a>
+                        <div class="navbar-dropdown gen-is-hidden">
+                            <a href="./Login.html" class="navbar-item">Login</a>
+                            <a href="./logout.php" class="navbar-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                    Welcome to the {{className}} Questions Page!
+            </h1>
+            <p class="subtitle">
+                Please enter short questions here, and I will assist you as soon as possible.
+            </p>
+            <a id="open-modal" class="button is-warning">New Question</a>
+            <br>
+            <br>
+            <!-- box level content for questions-->
+            {{content}}
+        </div>
+        <!-- End of container -->
+
+        <!-- Start of Create question modal --> 
+        <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <!-- Any other Bulma elements you want -->
+                <div class="box">
+                    <figure class="image is-96x96 container">
+                        <img src="images/bunny_icon.jpeg">
+                    </figure>
+                    <br>
+                    <br>
+                    <form name="question_form" method="post" action="./question_create.php">
+                        <div class="field">
+                            <div class="control">
+                                <input id="sName" name="sName" class="input is-large" type="text" placeholder="Your Name" autofocus="">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <input id="loc" name="loc" class="input is-large" type="text" placeholder=" Your computer number">
+                                <span class="icon is-small is-left">
+                                            <i class="fas fa fa-desktop" style="color: #f023"></i>
+                                        </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control ">
+                                <textarea id="question" name="question" class="textarea is-large" placeholder="Short question"></textarea>
+                            </div>
+                        </div>
+                        <button id="question_submit" type="submit" class="button is-block is-primary is-large is-fullwidth">Submit Question</button>
+                    </form>
+                </div>
+                <!--end of modal content -->
+            </div>
+            <!-- end of create question modal -->
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+        </div>
+
+        <!-- Message box -->
+        <div id="my_popup">
+            <article class="message">
+                <div class="message-header">
+                    <p>Message</p>
+                    <button class="delete my_popup_close" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                    <span>Some Message goes here!</span>
+                </div>
+            </article>
+        </div>
+    </section>
+</body>
+
+</html>
