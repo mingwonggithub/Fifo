@@ -59,6 +59,29 @@
 
         }); // End of crate session form
         
-        
+        // Remove corresponding session
+        $('input:radio[name="answer"]').change(function() {
+
+            var sessionid = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: 'session_delete.php',
+                data: { 'sessionid': sessionid },
+                success: function(result) {
+
+                    if (result == "success") {
+                        window.location.reload();
+                    } else {
+                        $('#my_popup span').text("Fail to delete session");
+                        $('#my_popup').popup('show')
+                    }
+                },
+                error: function(result) {
+                    $('#my_popup span').text("An error occurred with your session deletion");
+                    $('#my_popup').popup('show');
+                },
+            }); // End of ajax
+
+        }); // End of remove corresponding session
 
     });
