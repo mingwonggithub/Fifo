@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fifo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="css/gen.css">
+    <link rel="stylesheet" href="css/mystyles.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
+    <script src="js/jquery.redirect.js"></script>
+
+</head>
+
+<body>
+    <section class="hero is-medium">
+        <figure class="image">
+            <img src="images/usc.jpg">
+        </figure>
+    </section>
+    <nav class="navbar is-primary">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="./index_admin.html" style="font-weight:bold;">
+                    M
+                    <img src="images/bunny_icon2.png">
+                        W
+                        </a>
+                <span class="navbar-burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="./index_admin.html" class="navbar-item is-active">Home</a>
+                    <a href="https://cse.sc.edu/~pplante/csce101/index.html" class="navbar-item">CSCE 101 HomePage</a>
+                    <a href="https://cse.sc.edu/~cmatthew/" class="navbar-item">CSCE 102 HomePage</a>
+                    <div class="navbar-item has-dropdown">
+                        <a href="#Instructor" class="navbar-link">
+                            Instructor
+                        </a>
+                        <div class="navbar-dropdown gen-is-hidden">
+                            <a href="./Login.html" class="navbar-item">Login</a>
+                            <a href="./logout.php" class="navbar-item">Logout</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+             Welcome Students
+            </h1>
+            <p class="subtitle">
+                This is your Fifo system for lab instructors to attend to your questions in lab!
+            </p>
+            <br>
+            <div class="columns box">
+                <div class="column">
+                    <p class="subtitle">
+                    
+                    Please enter your course subject, number, and room with no spaces and room number to enter a session.
+                    </p>
+                    <form name="session_go_form" method="post" action="index_go.php">
+                        <div class="field">
+                            <div class="control">
+                                <input id="subject" name="subject" class="input is-large" type="text" placeholder="Subject e.g CSCE">
+                            </div>
+                            <br>
+                            <div class="control">
+                                <input id="courseN" name="courseN" class="input is-large" type="text" placeholder="Course Number e.g 101">
+                                    </div>
+                            <br>
+
+                            <div class="control">
+                                <input id="room" name="room" class="input is-large" type="text" placeholder="Room e.g 2D41">
+                                    </div>
+                            <br>
+
+                            <div class="control">
+                                <button type="submit" class="button is-block is-warning is-large">Enter Session</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <p class="subtitle">
+                    Finally, you don't need to raise your hand forever for the instructor to come. Just input your question and location into the session.
+                    </p>
+                    <p class="subtitle">
+                    If you notice similar topics from the questions list and the instructor is helping that student, you may go to that student computer to reduce waiting time!
+                    </p>
+                </div>
+                <div class="column">
+                    <figure class="image is-2by3">
+                        <img src="images/gamecock.jpg">
+                            </figure>
+                  
+                </div>
+            </div>
+     
+
+    <!-- Message box -->
+        <div id="my_popup">
+            <article class="message">
+                <div class="message-header">
+                    <p>Message</p>
+                    <button class="delete my_popup_close" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                    <span>Some Message goes here!</span>
+                </div>
+            </article>
+        </div>
+        
+    </div><!-- End of container -->
+    </section>
+
+    <script>
+    $(document).ready(function() {
+        $('#my_popup').popup({});
+
+        // Check for click events on the navbar burger icon
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        $(".navbar-burger").click(function() {
+            $(".navbar-menu").toggleClass("is-active");
+            $(".navbar-burger").toggleClass("is-active");
+        });
+
+        // Check for click events on the drowpdown
+        // is-hidden is required to hide the dropdown items on hamburger
+        // is-active is required to hide the dropdown items on big-screen
+        $(".navbar-item.has-dropdown").click(function() {
+            $(".navbar-item.has-dropdown").toggleClass("is-active");
+            $(".navbar-dropdown").toggleClass("gen-is-hidden");
+        });
+
+        $("#sess a").click(function(){
+            var currentId = $(this).attr('id');
+            $.redirect("./question.php", {'sessionid': currentId}, "POST", "_self");
+                           
+        });
+                      
+    var frm = $("form[name='session_go_form']");
+    $("form[name='session_go_form']").submit(function(event) {
+        event.preventDefault();
+        
+        if ($("#subject").val().trim() == "" ||
+            $("#courseN").val().trim() == "" ||
+            $('#room').val().trim() == "") {
+
+            $("#my_popup span").text('All fields are required.');
+            $('#my_popup').popup('show');
+        }else{
+
+            $.ajax({
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: frm.serialize(), // serializes the form's elements
+                dataType: 'JSON',
+                success: function(result) {
+
+                   if (result[0].success == "yes") {
+                        /*$('#my_popup span').text("Your session " + result[0].sessionid + " is successful.");
+                        $('#my_popup').popup('show'); */
+                        $.redirect("./question.php", {'sessionid': result[0].sessionid}, "POST", "_self");
+
+
+                    } else {
+                        $('#my_popup span').text("This session has not been made yet." );
+                        $('#my_popup').popup('show');
+                    }
+                },
+                error: function(result) {
+                   
+                    $('#my_popup span').text("An error occurred with your session creation");
+                    $('#my_popup').popup('show');
+                },
+            }); // End of ajax 
+
+        }// End of else 
+        
+    });// End of session form
+                      
+
+    });
+    </script>
+</body>
+
+</html>
