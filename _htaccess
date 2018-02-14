@@ -1,0 +1,6 @@
+# Force HTTPS
+# http://kb.securesignup.net/index.php?/article/AA-00421/7/Free-Hosting/Force-HTTPS-redirection.html
+RewriteEngine On
+RewriteCond %{ENV:HTTPS} !on [OR]
+RewriteCond %{HTTP_HOST} !^www.thisisming.com$ [NC]
+RewriteRule ^(.*)$ https://www.thisisming.com/$1 [L,R=301]
