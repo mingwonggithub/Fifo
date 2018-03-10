@@ -6,6 +6,12 @@ include'functions.php';
 if (!isset($_SESSION)){
         session_start();
 }
+/*if (session_status() == PHP_SESSION_NONE || session_id() == '') {
+    session_start();
+} Need to check in the future */ 
+    
+/*ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT); */
 
 $mysqlDB  = connectToFifoDb();
 if (is_ajax()) {
@@ -32,7 +38,7 @@ if (is_ajax()) {
                               "topic" => $topic,
                               "sessionid" => $sessionid);
     }else{
-        $return_arr[] = array("success" => "yes",
+        $return_arr[] = array("success" => "no",
                               "student" => $sName,
                               "location" => $loc,
                               "topic" => $topic,
@@ -40,12 +46,11 @@ if (is_ajax()) {
     }
       
       
-   
-      
-    echo json_encode($return_arr);
+   echo json_encode($return_arr);
 
   }//End of isset
 
 }//End of ajax 
+
 
 ?>

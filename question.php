@@ -2,8 +2,9 @@
 /* Goal of this program is to populate
 question list on Question.html */ 
     include'functions.php';
-    if (!isset($_SESSION)){
-        session_start();
+
+    if (session_status() == PHP_SESSION_NONE || session_id() == '') {
+    session_start();
     }
     
     if(isset($_POST["userid"]) && !empty($_POST["userid"]) ){
@@ -36,13 +37,16 @@ question list on Question.html */
     $str = ""; 
     while($stmt->fetch())
     {
-        $str = $str . "<div class='box level'><div class='tile is-ancestor'><div class='tile is-2'>"
+        $str = $str . "<div class='box level questionbox'>"
+        ."<div class='tile is-ancestor'><div class='tile is-2'>"
         . $student
         ."<br>"
         .$loc
-        ."</div><div class='tile is-9'>"
+        ."</div><div id='quest' class='tile is-9'><a id='q"
+        .$qid
+        ."'>"
         .$topic
-        ."</div><div class='tile is-1'><a id='"
+        ."</a></div><div class='tile is-1'><a id='"
         .$qid
         . "'class='button question'><span class='icon is-medium is-info'><i class='fas fa-trash'></i></span></a></div></div></div>";
         
