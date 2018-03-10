@@ -68,8 +68,7 @@
             {{content}}
         </div>
         <!-- End of container -->
-
-        <!-- Start of Create question modal --> 
+        <!-- Start of Create question modal -->
         <div class="modal">
             <div class="modal-background"></div>
             <div class="modal-content">
@@ -90,7 +89,7 @@
                             <div class="control has-icons-left">
                                 <input id="loc" name="loc" class="input is-large" type="text" placeholder=" Your computer number">
                                 <span class="icon is-small is-left">
-                                            <i class="fas fa fa-desktop" style="color: #f023"></i>
+                                            <i class="fas fa fa-desktop" style="color: #73000A"></i>
                                         </span>
                             </div>
                         </div>
@@ -107,8 +106,6 @@
             <!-- end of create question modal -->
             <button class="modal-close is-large" aria-label="close"></button>
         </div>
-        </div>
-
         <!-- Message box -->
         <div id="my_popup">
             <article class="message">
@@ -118,6 +115,27 @@
                 </div>
                 <div class="message-body">
                     <span>Some Message goes here!</span>
+                </div>
+            </article>
+        </div>
+        <!-- Message box -->
+        <div id="answer_popup" class="well" style="max-width:44em;">
+            <article class="message is-primary is-medium">
+                <div class="message-header">
+                    <p>Reply to Question</p>
+                    <button class="delete answer_popup_close" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                    <span style="color: black">Here are hints to the problem</span>
+                    <div class="field">
+                        <div class="control ">
+                            <textarea readonly id="answer" name="answer" class="textarea is-medium" placeholder="Answer" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <button id="edit_answer" class="button  is-primary is-medium">Edit</button>
+                        <button id="submit_answer" disabled class="button  is-primary is-medium">Submit</button>
+                    </div>
                 </div>
             </article>
         </div>
