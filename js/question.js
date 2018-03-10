@@ -1,5 +1,7 @@
     $(document).ready(function() {
         $('#my_popup').popup({});
+        $('#answer_popup').popup({});
+
 
         // Check for click events on the navbar burger icon
         // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
@@ -16,6 +18,73 @@
             $(".navbar-dropdown").toggleClass("gen-is-hidden");
         });
 
+        $("#edit_answer").click(function() {
+            $("#answer").removeAttr("readonly");
+            $("#submit_answer").removeAttr("disabled");
+
+            //var questionId = $('#answer_popup article').attr('id');
+            //questionId = questionId.substring(2);
+
+        });
+
+        $("#submit_answer").click(function() {
+
+            var questionId = $('#answer_popup article').attr('id');
+            questionId = questionId.substring(2);
+            var answer = $('#answer_popup textarea').val(); 
+
+           $.ajax({
+                type: 'POST',
+                url: 'question_replysubmit.php',
+                data: { 'qid': questionId, 'answer': answer },
+                dataType: 'JSON',
+                success: function(result) {
+                   // $('#answer_popup').popup('hide');
+
+                    if (result[0].success == "yes") {
+                        $.redirect("./question.php", { 'sessionid': result[0].sessionid }, "POST", "_self");
+                    } else {
+                        $('#my_popup span').text("Fail to submit answer from qid =" + result[0].qid);
+                        $('#my_popup').popup('show');
+                    }
+                },
+                error: function(result) {
+                    $('#my_popup span').text("An error occurred with submitting answer");
+                    $('#my_popup').popup('show');
+                },
+            }); // End of ajax
+
+        });
+
+        $("#quest a").click(function(event) {
+            var questionId = $(this).attr('id');
+            questionId = questionId.substring(1);
+
+            $.ajax({
+                type: 'POST',
+                url: 'question_replydisplay.php',
+                data: { 'qid': questionId },
+                dataType: 'JSON',
+                success: function(result) {
+                    if (result[0].success == "yes") {
+                        $('#answer_popup article').attr('id', 'qq' + result[0].qid);
+                        $('#answer_popup textarea').text(result[0].answer);
+                        $('#answer_popup').popup('show');
+                        //$.redirect("./question.php", { 'sessionid': result[0].sessionid }, "POST", "_self");
+                    } else {
+                        $('#my_popup span').text("Fail to obtain answer from qid =" + result[0].qid);
+                        $('#my_popup').popup('show')
+                    }
+                },
+                error: function(result) {
+                    $('#my_popup span').text("An error occurred with obtaining answer");
+                    $('#my_popup').popup('show');
+                },
+            }); // End of ajax
+
+            //$.redirect("./question.php", { 'sessionid': currentId }, "POST", "_self");
+
+        });
 
         $("a#open-modal").bind("click", function(event) {
             event.preventDefault();
@@ -91,6 +160,7 @@
                         $('.html').removeClass("is-clipped");
                     },
                     error: function(result) {
+                        alert(result);
                         $('#my_popup span').text("An error occurred with your question submission.");
                         $('#my_popup').popup('show');
                     },
